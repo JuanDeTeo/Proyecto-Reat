@@ -1,82 +1,53 @@
-import { createContext, useContext, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-// 1. Crear el contexto (esto es como una "caja vacía" que llenaremos después)
-const AppContext = createContext();
+const UserTable = () => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-// 2. Crear el componente proveedor (el que "rellena la caja")
-function AppProvider({ children }) {
-  const [count, setCount] = useState(0);
+  useEffect(() => {
+    // Función para obtener los datos de la API
+    const fetchUsers = async () => {
+      try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/users');
+        const data = await response.json();
+        setUsers(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error al obtener los usuarios:', error);
+        setLoading(false);
+      }
+    };
 
-  // Función para incrementar el contador
-  const increment = () => {
-    setCount(count + 1);
-  };
+    fetchUsers();
+  }, []); // El array vacío [] significa que se ejecuta solo al montar el componente
+
+  if (loading) {
+    return <div>Cargando usuarios...</div>;
+  }
 
   return (
-    <AppContext.Provider value={{ count, increment }}>
-      {children}
-    </AppContext.Provider>
-  );
-}
-
-// 3. Componente que muestra el contador
-function CounterDisplay() {
-  const { count } = useContext(AppContext);
-  
-  return (
-    <div style={{
-      fontSize: '2rem',
-      margin: '20px',
-      padding: '20px',
-      backgroundColor: '#f0f0f0',
-      borderRadius: '10px'
-    }}>
-      Contador: {count}
+    <div style={{ padding: '20px' }}>
+      <h2>Lista de Usuarios</h2>
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
+        <thead>
+          <tr style={{ backgroundColor: '#f2f2f2' }}>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Nombre</th>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Username</th>
+            <th style={{ padding: '10px', border: '1px solid #ddd' }}>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map((user) => (
+            <tr key={user.id} style={{ border: '1px solid #ddd' }}>
+              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.name}</td>
+              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.username}</td>
+              <td style={{ padding: '10px', border: '1px solid #ddd' }}>{user.email}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
-}
+};
 
-// 4. Componente con el botón para incrementar
-function IncrementButton() {
-  const { increment } = useContext(AppContext);
-  
-  return (
-    <button
-      onClick={increment}
-      style={{
-        padding: '10px 20px',
-        fontSize: '1.2rem',
-        backgroundColor: '#4CAF50',
-        color: 'white',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer'
-      }}
-    >
-      Sumar +1
-    </button>
-  );
-}
-
-// 5. Componente principal que ENVUELVE todo
-function App() {
-  return (
-    <AppProvider>
-      <div style={{
-        textAlign: 'center',
-        padding: '40px',
-        minHeight: '100vh',
-        backgroundColor: '#f9f9f9'
-      }}>
-        <h1>Ejemplo de useContext</h1>
-        <CounterDisplay />
-        <IncrementButton />
-        <p style={{ marginTop: '20px' }}>
-          Haz clic en el botón para aumentar el contador
-        </p>
-      </div>
-    </AppProvider>
-  );
-}
-
-export default App;
+export default UserTable;
