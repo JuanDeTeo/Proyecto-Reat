@@ -1,12 +1,16 @@
-# React + Vite
+## Qué aprendí
+- Cómo configurar React Router en una aplicación React
+- La diferencia entre BrowserRouter, Routes y Route
+- Cómo crear enlaces de navegación con el componente Link
+- Cómo redirigir programáticamente con useNavigate
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Dificultades encontradas
+- Al principio no entendía bien la diferencia entre BrowserRouter y Routes
+- Tuve que investigar cómo estructurar correctamente las rutas anidadas
+- Me costó un poco entender el uso de useNavigate al principio
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Cómo resolví el enrutamiento
+1. Envolví toda la aplicación con BrowserRouter en main.jsx
+2. En App.jsx creé las rutas principales usando Routes y Route
+3. Para la navegación usé el componente Link en la barra de navegación
+4. Para redirecciones programáticas usé el hook useNavigate
