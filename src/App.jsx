@@ -6,6 +6,7 @@ import Mapa from './components/Mapa'
 import Direcciones from './components/Direcciones'  // Importación añadida
 import MapWithClustering from './components/MapWithClustering';
 import DrawingToolsMap from './components/DrawingToolsMap';
+import RoutesMap from './components/RoutesMap';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Link to="/direcciones" style={{ marginRight: '10px' }}>Direcciones</Link>
         <Link to="/mapClustering" style={{ marginRight: '10px' }}>MapClustering</Link>
         <Link to="/drawingToolsMap" style={{ marginRight: '10px' }}>DrawingToolsMap</Link>
+        <Link to="/routesMap" style={{ marginRight: '10px' }}>RoutesMap</Link>
 
       </nav>
 
@@ -31,7 +33,7 @@ function App() {
         <Route path="/direcciones" element={<Direcciones />} />
         <Route path="/mapClustering" element={<MapWithClustering />} />
         <Route path="/drawingToolsMap" element={<DrawingToolsMap />} />
-
+        <Route path="/routesMap" element={<RoutesMap />} />
       </Routes>
     </div>
   )
