@@ -1,102 +1,41 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { Link, Route, Routes } from 'react-router-dom'
+import Home from './components/Home'
+import About from './components/About'
+import Contact from './components/Contact'
+import Mapa from './components/Mapa'
+import Direcciones from './components/Direcciones'  // Importación añadida
+import MapWithClustering from './components/MapWithClustering';
+import DrawingToolsMap from './components/DrawingToolsMap';
+import RoutesMap from './components/RoutesMap';
 
-//xdXd
 function App() {
-  const [count, setCount] = useState(0)
+  return (
+    <div>
+      {/* Barra de navegación */}
+      <nav style={{ padding: '10px', background: '#f0f0f0' }}>
+        <Link to="/" style={{ marginRight: '10px' }}>Inicio</Link>
+        <Link to="/about" style={{ marginRight: '10px' }}>Acerca de</Link>
+        <Link to="/contact" style={{ marginRight: '10px' }}>Contacto</Link>
+        <Link to="/mapa" style={{ marginRight: '10px' }}>Ubicación</Link>
+        <Link to="/direcciones" style={{ marginRight: '10px' }}>Direcciones</Link>
+        <Link to="/mapClustering" style={{ marginRight: '10px' }}>MapClustering</Link>
+        <Link to="/drawingToolsMap" style={{ marginRight: '10px' }}>DrawingToolsMap</Link>
+        <Link to="/routesMap" style={{ marginRight: '10px' }}>RoutesMap</Link>
 
-  useEffect(() =>{
-    if(count > 10){
-      
-      alert("El limite es 10");
-      setCount(0);
-    }
+      </nav>
 
-  } , [count]);
-
-  const listaUsuario =[{
-    nombre: "Erick",
-    apellido: "Sanchez",
-    edad: 35,
-  },
-  {
-    nombre: "Luis",
-    apellido: "Perez",
-    edad: 23,
-  },
-  {
-    nombre: "Pancho",
-    apellido: "Panteras",
-    edad: 44,
-  },
-  {
-    nombre: "Megumin",
-    apellido: "Cramesi",
-    edad: 14,
-  },
-  {
-    nombre: "Kasuma",
-    apellido: "Basuma",
-    edad: 17,
-  }
-];
-
-return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="right">nombre</TableCell>
-            <TableCell align="right">apellido</TableCell>
-            <TableCell align="right">edad</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {listaUsuario.map((usuario) => (
-            <TableRow
-              key={usuario.nombre}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell align="right">{usuario.nombre}</TableCell>
-              <TableCell align="right">{usuario.apellido}</TableCell>
-              <TableCell align="right">{usuario.edad}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-      
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      {/* Rutas */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/mapa" element={<Mapa />} />
+        <Route path="/direcciones" element={<Direcciones />} />
+        <Route path="/mapClustering" element={<MapWithClustering />} />
+        <Route path="/drawingToolsMap" element={<DrawingToolsMap />} />
+        <Route path="/routesMap" element={<RoutesMap />} />
+      </Routes>
+    </div>
   )
 }
 
